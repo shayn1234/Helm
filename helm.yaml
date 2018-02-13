@@ -1,0 +1,36 @@
+node_types:
+  cloudify.nodes.Helm:
+    derived_from: cloudify.nodes.SoftwareComponent
+    properties:
+      cwd:
+        default: /home/centos/oom/kubernetes/oneclick
+      args:
+        default:
+        - system-name
+        - component-name
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start:
+          implementation: fabric.fabric_plugin.tasks.run_script
+          inputs:
+            script_path:
+              default: scripts/helminstall.sh # Relative to the blueprint file.
+            process:
+              default: &process_vars
+                cwd: { get_property: [ SELF, cwd ] }
+                args: { get_property: [ SELF, args ] }
+            fabric_env:
+              default: &fabric_env
+                user: { get_property: [ k8s_master, agent_config, user ] }
+                host_string: { get_property: [ k8s_master, ip ] }
+                key: { get_property: [ k8s_master, agent_config, key ] }
+        stop:
+          implementation: fabric.fabric_plugin.tasks.run_script
+          inputs:
+            script_path:
+              default: scripts/helmdelete.sh
+            process:
+              default: *process_vars
+            fabric_env:
+              default: *fabric_env
+
