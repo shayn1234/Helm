@@ -13,7 +13,7 @@ inputs:
   user:
     default: centos
   namespace_perfix:
-    default: onap
+    default: WRCP
 
 node_templates:
 

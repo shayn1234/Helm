@@ -3,7 +3,7 @@ node_types:
     derived_from: cloudify.nodes.SoftwareComponent
     properties:
       cwd:
-        default: /home/centos/oom/kubernetes/oneclick
+        default: /home/centos/helm
       args:
         default:
         - system-name

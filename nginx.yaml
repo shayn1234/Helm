@@ -1,0 +1,38 @@
+tosca_definitions_version: cloudify_dsl_1_3
+
+imports:
+  - http://www.getcloudify.org/spec/cloudify/3.4.2/types.yaml
+  - http://www.getcloudify.org/spec/fabric-plugin/1.5/plugin.yaml
+  - helm.yaml
+
+inputs:
+
+  install_method:
+    default: none
+  ip:
+    default: 3.128.86.172
+  user:
+    default: centos
+  package:
+    default: nginx-stable/nginx-ingress
+
+node_templates:
+
+  k8s_master:
+     type: cloudify.nodes.Compute
+     properties:
+       ip: { get_input: ip }
+       agent_config:
+         install_method: { get_input: install_method }
+         key: { get_secret: agent_key_private }
+         user: { get_input: user }
+
+  nginx:
+     type: cloudify.nodes.Helm
+     properties:
+       args:
+       - { get_input: package }
+       - my-nginx
+     relationships:
+       - type: cloudify.relationships.connected_to
+         target: k8s_master
