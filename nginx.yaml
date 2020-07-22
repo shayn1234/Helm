@@ -24,7 +24,7 @@ node_templates:
        ip: { get_input: ip }
        agent_config:
          install_method: { get_input: install_method }
-         key: { get_secret: agent_key_private }
+         key: { get_secret: agent_key1_private }
          user: { get_input: user }
 
   nginx:
