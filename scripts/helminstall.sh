@@ -1,4 +1,4 @@
 #!/bin/bash
-env   
-kubectl get pods
+export KUBECONFIG=/etc/kubernetes/admin.conf
+env
 helm install --name $2 $1
