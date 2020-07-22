@@ -2,7 +2,7 @@ tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
   - http://www.getcloudify.org/spec/cloudify/3.4.2/types.yaml
-  - http://www.getcloudify.org/spec/fabric-plugin/1.5/plugin.yaml
+  - http://www.getcloudify.org/spec/fabric-plugin/1.5.3/plugin.yaml
   - helm.yaml
 
 inputs:
@@ -10,9 +10,9 @@ inputs:
   install_method:
     default: none
   ip:
-    default: 3.128.86.172
+    default: 147.11.93.10
   user:
-    default: centos
+    default: sysadmin
   package:
     default: nginx-stable/nginx-ingress
 
