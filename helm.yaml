@@ -3,7 +3,7 @@ node_types:
     derived_from: cloudify.nodes.SoftwareComponent
     properties:
       cwd:
-        default: /home/centos/helm
+        default: /home/sysadmin
       args:
         default:
         - system-name
