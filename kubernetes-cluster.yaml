@@ -1,10 +1,3 @@
-tosca_definitions_version: cloudify_dsl_1_3
-
-imports:
-  - http://www.getcloudify.org/spec/cloudify/3.4.2/types.yaml
-  - http://www.getcloudify.org/spec/fabric-plugin/1.5.3/plugin.yaml
-
-
 node_types:
   kubernetes_cluster:
     derived_from: cloudify.nodes.SoftwareComponent
@@ -13,21 +6,23 @@ node_types:
         default: /home/sysadmin
     interfaces:
       helm:
-        implementation: fabric.fabric_plugin.tasks.run_script
-        inputs:
-          script_path:
-            default: scripts/helminstall.sh # Relative to the blueprint file.
-          process:
-            default: &process_vars
-               cwd: { get_property: [ SELF, cwd ] }
-               args: { get_attribute: [ SELF, package_name ] }
-          fabric_env:
-             default: &fabric_env
-              user: { get_input: user }
-              host_string: { get_property: [ SELF, ip ] }
-              key: { get_secret: agent_key1_private }
+        install:
+          implementation: fabric.fabric_plugin.tasks.run_script
+          inputs:
+            script_path:
+              default: scripts/helminstall.sh # Relative to the blueprint file.
+            process:
+              default: &process_vars
+                cwd: { get_property: [ SELF, cwd ] }
+                args: { get_attribute: [ SELF, package_name ] }
+            fabric_env:
+               default: &fabric_env
+                 user: { get_input: user }
+                host_string: { get_property: [ SELF, ip ] }
+                key: { get_secret: agent_key1_private }
       unhelm:
-        implementation: fabric.fabric_plugin.tasks.run_script
+        install:
+          implementation: fabric.fabric_plugin.tasks.run_script
           inputs:
             script_path:
               default: scripts/helmdelete.sh
