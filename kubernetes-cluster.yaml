@@ -10,6 +10,7 @@ node_types:
       helm:
         install:
           implementation: fabric.fabric_plugin.tasks.run_script
+          executor: central_deployment_agent
           inputs:
             script_path:
               default: scripts/helminstall.sh # Relative to the blueprint file.
@@ -25,6 +26,7 @@ node_types:
       unhelm:
         install:
           implementation: fabric.fabric_plugin.tasks.run_script
+          executor: central_deployment_agent
           inputs:
             script_path:
               default: scripts/helmdelete.sh
