@@ -3,7 +3,7 @@ tosca_definitions_version: cloudify_dsl_1_3
 imports:
   - http://www.getcloudify.org/spec/cloudify/3.4.2/types.yaml
   - http://www.getcloudify.org/spec/fabric-plugin/1.5.3/plugin.yaml
-  - helm.yaml
+  - kubernetes-cluster.yaml
 
 inputs:
   install_method:
@@ -20,15 +20,12 @@ node_templates:
       agent_config:
         install_method: { get_input: install_method }
 
-
 #  kubernetes_cluster2:
 #    type: kubnernetes_cluster
 #    properties:
 #      ip: 147.11.92.230
 #      agent_config:
 #        install_method: { get_input: install_method }
-
-
 
 workflows:
   install_chart_on_clusters:
