@@ -3,7 +3,7 @@ tosca_definitions_version: cloudify_dsl_1_3
 imports:
   - http://www.getcloudify.org/spec/cloudify/3.4.2/types.yaml
   - http://www.getcloudify.org/spec/fabric-plugin/1.5.3/plugin.yaml
-  - kubernetes-cluster.yaml
+
 
 node_types:
   kubernetes_cluster:

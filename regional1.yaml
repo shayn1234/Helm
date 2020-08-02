@@ -14,7 +14,7 @@ inputs:
 
 node_templates:
   kubernetes_cluster1:
-    type: kubnernetes_cluster
+    type: kubernetes_cluster
     properties:
       ip: 147.11.93.10
       agent_config:
