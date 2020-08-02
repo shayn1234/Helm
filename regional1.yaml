@@ -17,8 +17,7 @@ node_templates:
     type: kubernetes_cluster
     properties:
       ip: 147.11.93.10
-      agent_config:
-        install_method: { get_input: install_method }
+
 
 #  kubernetes_cluster2:
 #    type: kubnernetes_cluster
@@ -30,5 +29,9 @@ node_templates:
 workflows:
   install_chart_on_clusters:
     mapping: scripts/install_chart_on_clusters.py
+    parameters:
+      package_name: {}
   uninstall_chart_on_clusters:
     mapping: scripts/uninstall_chart_on_clusters.py
+    parameters:
+      package_name: {}

@@ -1,8 +1,9 @@
 from cloudify.workflows import ctx
-from cloudify.workflows import parameters as p
+from cloudify.decorators import workflow
 
-for node in ctx.nodes:
-    for instance in node.instances:
-        ctx.instance.runtime_properties['package_name'] = p.package_name
-        instance.execute_operation('helm', kwargs={
-        })
+@workflow
+def install_chart_on_clusters(package_name, **kwargs):
+      for node in ctx.nodes:
+         for instance in node.instances:
+                ctx.instance.runtime_properties['package_name'] = package_name
+                instance.execute_operation('helm.install', kwargs={})

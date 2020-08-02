@@ -1,19 +1,17 @@
 tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/3.4.2/types.yaml
+  - http://cloudify.co/spec/cloudify/5.0.0/types.yaml
   - http://www.getcloudify.org/spec/fabric-plugin/1.5.3/plugin.yaml
-  - helm.yaml
 
+node_templates:
 
- regional1:
+  regional1:
     type: cloudify.nodes.SharedResource
     properties:
-      resource_config:
-        deployment:
-          id: regional1
-
-
+       resource_config:
+         deployment:
+           id: regional1
   regional1-deploy:
     type: cloudify.nodes.Root
     relationships:

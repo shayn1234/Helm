@@ -2,6 +2,8 @@ node_types:
   kubernetes_cluster:
     derived_from: cloudify.nodes.SoftwareComponent
     properties:
+      ip:
+        default: {}
       cwd:
         default: /home/sysadmin
     interfaces:
@@ -18,8 +20,8 @@ node_types:
             fabric_env:
                default: &fabric_env
                  user: { get_input: user }
-                host_string: { get_property: [ SELF, ip ] }
-                key: { get_secret: agent_key1_private }
+                 host_string: { get_property: [ SELF, ip ] }
+                 key: { get_secret: agent_key1_private }
       unhelm:
         install:
           implementation: fabric.fabric_plugin.tasks.run_script
