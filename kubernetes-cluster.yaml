@@ -1,0 +1,30 @@
+node_types:
+  kubernetes_cluster:
+    derived_from: cloudify.nodes.SoftwareComponent
+    properties:
+      cwd:
+        default: /home/sysadmin
+    interfaces:
+      helm:
+        implementation: fabric.fabric_plugin.tasks.run_script
+        inputs:
+          script_path:
+            default: scripts/helminstall.sh # Relative to the blueprint file.
+          process:
+            default: &process_vars
+               cwd: { get_property: [ SELF, cwd ] }
+               args: { get_attribute: [ SELF, package_name ] }
+          fabric_env:
+             default: &fabric_env
+              user: { get_input: user }
+              host_string: { get_property: [ SELF, ip ] }
+              key: { get_secret: agent_key1_private }
+      unhelm:
+        implementation: fabric.fabric_plugin.tasks.run_script
+          inputs:
+            script_path:
+              default: scripts/helmdelete.sh
+            process:
+              default: *process_vars
+            fabric_env:
+              default: *fabric_env
