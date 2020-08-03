@@ -9,20 +9,14 @@ inputs:
   install_method:
     default: none
   user:
-    default: sysadmin
+    default: azure
 
 
 node_templates:
   kubernetes_cluster1:
     type: kubernetes_cluster
     properties:
-      ip: 147.11.93.10
-
-
- kubernetes_cluster2:
-    type: kubnernetes_cluster
-    properties:
-      ip: 147.11.92.230
+      ip: x.x.x.x
 
 
 workflows:
