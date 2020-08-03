@@ -7,3 +7,4 @@ def uninstall_chart_on_clusters(package_name, **kwargs):
          for instance in node.instances:
                 ctx.instance.runtime_properties['package_name'] = package_name
                 instance.execute_operation('unhelm.install', kwargs={})
+

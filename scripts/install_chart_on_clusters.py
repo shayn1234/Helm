@@ -7,17 +7,21 @@ from cloudify.state import ctx_parameters as input
 #        ctx.instance.runtime_properties['package_name'] = input
 #        instance.execute_operation('helm.install', kwargs={})
 
+def update_props(ni):
+	client_ni = client.node_instaces.get(ni.id)
+	props = client_ni.runtime_properties
+	props['package_name'] = dict(input)
+	client.node_instances.update(
+		client_ni.id,
+		version=client_ni.version,
+		runtime_properties=props
+	)
 
-client = get_rest_client()
-for n in client.nodes.list():
-    ctx.logger.info("node {0}".format(n.id))
-    if (n.type=='kubernetes_cluster'):
-        for ni in client.node_instances.list(node_id=n.id):
-            ctx.logger.info("node {0}".format(ni.id))
-            client.node_instances.update(
-            ni.id,
-            version=ni.version,
-            runtime_properties={'package_name': input}
-            )
-            ctx.logger.info("node {0}".format(input))
-            ni.execute_operation('helm.install', kwargs={})
+for ni in ctx.node_instances:
+	if ni.node.type == 'kubernetes_cluster':
+		update_props(ni)
+		ni.execute_operation('helm.install_chart', kwargs={})
+
+
+
+
