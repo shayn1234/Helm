@@ -21,7 +21,7 @@ def update_props(ni):
 for ni in ctx.node_instances:
 	if ni.node.type == 'kubernetes_cluster':
 		update_props(ni)
-		ni.execute_operation('helm.install_chart', kwargs={})
+		ni.execute_operation('helm.install', kwargs={})
 
 
 
