@@ -35,3 +35,4 @@ workflows:
     mapping: scripts/uninstall_chart_on_clusters.py
     parameters:
       package_name: {}
+
