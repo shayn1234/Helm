@@ -1,6 +1,6 @@
 from cloudify.workflows import ctx
 from cloudify.manager import get_rest_client
-from cloudify.state import ctx_parameters as input
+from cloudify.state import workflow_parameters as input
 
 #for node in ctx.nodes:
 #    for instance in node.instances:
@@ -9,7 +9,7 @@ from cloudify.state import ctx_parameters as input
 
 def update_props(ni):
 	client=get_rest_client()
-	client_ni = client.node_instances.get(ni.id) 
+	client_ni = client.node_instances.get(ni.id)
 	props = client_ni.runtime_properties
 	props['package_name'] = dict(input)
 	client.node_instances.update(
