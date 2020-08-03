@@ -17,7 +17,7 @@ node_types:
             process:
               default: &process_vars
                 cwd: { get_property: [ SELF, cwd ] }
-                args: { get_attribute: [ SELF, package_name ] }
+                args: [{ get_attribute: [ SELF, package_name ]} ]
             fabric_env:
                default: &fabric_env
                  user: { get_input: user }
