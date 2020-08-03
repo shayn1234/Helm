@@ -8,6 +8,7 @@ from cloudify.state import ctx_parameters as input
 #        instance.execute_operation('helm.install', kwargs={})
 
 def update_props(ni):
+	client=get_rest_client()
 	client_ni = client.node_instaces.get(ni.id)
 	props = client_ni.runtime_properties
 	props['package_name'] = dict(input)
