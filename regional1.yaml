@@ -19,8 +19,8 @@ node_templates:
       ip: 147.11.93.10
 
 
- kubernetes_cluster2:
-    type: kubnernetes_cluster
+  kubernetes_cluster2:
+    type: kubernetes_cluster
     properties:
       ip: 147.11.92.230
 

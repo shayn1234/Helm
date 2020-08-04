@@ -9,14 +9,14 @@ inputs:
   install_method:
     default: none
   user:
-    default: azure
+    default: centos
 
 
 node_templates:
   kubernetes_cluster1:
     type: kubernetes_cluster
     properties:
-      ip: x.x.x.x
+      ip: 3.128.86.172
 
 
 workflows:
