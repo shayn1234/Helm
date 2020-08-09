@@ -20,10 +20,10 @@ node_templates:
         start:
           implementation: scripts/regional_deploy.py
           inputs:
-             helm-package: {get_input: helm-package}
+             package-name: {get_input: helm-package}
         stop:
           implementation: scripts/regional_undeploy.py
             inputs:
-              helm-package: {get_input: helm-package}
+              package-name: {get_input: helm-package}
 
 
