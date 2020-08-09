@@ -13,17 +13,17 @@ inputs:
 node_templates:
   regional-deploy:
     type: cloudify.nodes.Root
-    properties:
-      regional_list: {get_input: regional_list}
     interfaces:
       cloudify.interfaces.lifecycle:
         start:
           implementation: scripts/regional_deploy.py
           inputs:
              package-name: {get_input: helm-package}
+             regions: {get_input: regional-list}
         stop:
           implementation: scripts/regional_undeploy.py
-            inputs:
-              package-name: {get_input: helm-package}
+          inputs:
+             package-name: {get_input: helm-package}
+             regions: {get_input: regional-list}
 
 
