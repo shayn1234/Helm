@@ -6,7 +6,9 @@ imports:
 
 inputs:
   regional-list:
-    default: [regional1]
+    type: list
+    default:
+      - regional1
   helm-package:
     default: nginx-stable/nginx-ingress
 
@@ -19,13 +21,13 @@ node_templates:
           implementation: scripts/regional_deploy.py
           executor: central_deployment_agent
           inputs:
-             package-name: {get_input: helm-package}
+             package_name: {get_input: helm-package}
              regions: {get_input: regional-list}
         stop:
           implementation: scripts/regional_undeploy.py
           executor: central_deployment_agent
           inputs:
-             package-name: {get_input: helm-package}
+             package_name: {get_input: helm-package}
              regions: {get_input: regional-list}
 
 
