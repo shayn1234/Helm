@@ -18,13 +18,11 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         start:
-          implementation:
-            scripts/regional_deploy.py
+          implementation: scripts/regional_deploy.py
           inputs:
              helm-package: {get_input: helm-package}
         stop:
-          implementation:
-            scripts/regional_undeploy.py
+          implementation: scripts/regional_undeploy.py
             inputs:
               helm-package: {get_input: helm-package}
 
