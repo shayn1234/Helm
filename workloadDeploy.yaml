@@ -18,4 +18,4 @@ node_types:
             package_name:
               default: {get_input: helm-package}
             regions:
-              defaults: {get_input: regional-list}
+              default: {get_input: regional-list}
