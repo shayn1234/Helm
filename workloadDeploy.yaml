@@ -7,11 +7,15 @@ node_types:
           implementation: scripts/workload_deploy.py
           executor: central_deployment_agent
           inputs:
-            package_name: {get_input: helm-package}
-            regions: {get_input: regional-list}
+            package_name:
+              default: {get_input: helm-package}
+            regions:
+              default: {get_input: regional-list}
         stop:
           implementation: scripts/workload_undeploy.py
           executor: central_deployment_agent
           inputs:
-            package_name: {get_input: helm-package}
-            regions: {get_input: regional-list}
+            package_name:
+              default: {get_input: helm-package}
+            regions:
+              defaults: {get_input: regional-list}
