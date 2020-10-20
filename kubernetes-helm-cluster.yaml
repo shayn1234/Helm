@@ -1,0 +1,38 @@
+node_types:
+  kubernetes_helm_cluster:
+    derived_from: cloudify.nodes.Component
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          implementation: cfy_extensions.cloudify_types.component.upload_blueprint
+        configure: {}
+        helm_configure:
+          implementation: cfy_extensions.cloudify_types.component.create
+        start: {}
+        helm_install:
+          implementation: cfy_extensions.cloudify_types.component.execute_start
+          inputs:
+            workflow_id:
+              type: string
+              default: install
+            timeout:
+              description: How long (in seconds) to wait for execution to finish before timing out.
+              type: integer
+              default: 1800
+            interval:
+              description: Polling interval (seconds).
+              type: integer
+              default: 10
+        helm_uninstall:
+          implementation: cfy_extensions.cloudify_types.component.execute_start
+          inputs:
+            workflow_id:
+              default: uninstall
+            resource_config:
+              default:
+                blueprint: { get_property: [ SELF, resource_config, blueprint ] }
+                deployment: { get_property: [ SELF, resource_config, deployment ] }
+                executions_start_args:
+                  allow_custom_parameters: true
+        delete:
+          implementation: cfy_extensions.cloudify_types.component.delete

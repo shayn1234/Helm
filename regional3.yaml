@@ -1,7 +1,7 @@
 tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/3.4.2/types.yaml
+  - http://www.getcloudify.org/spec/cloudify/5.0.5/types.yaml
   - http://www.getcloudify.org/spec/fabric-plugin/1.5.3/plugin.yaml
   - kubernetes-helm-cluster.yaml
 
@@ -16,7 +16,17 @@ node_templates:
   kubernetes_cluster1:
     type: kubernetes_helm_cluster
     properties:
-      kube_config: { get_secret: kube_config }
+      resource_config:
+        blueprint:
+          id: r31
+          blueprint_archive: 'https://github.com/shayn1234/Helm/archive/master.zip'
+          main_file_name: 'helm-dep.yaml'
+          external_resource: false
+        deployment:
+          id: r31
+          inputs: 
+            package_name: { get_attribute: [ SELF, package_name ] }
+
 
 
 
