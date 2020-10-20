@@ -9,8 +9,7 @@ inputs:
   regional-list:
     type: list
     default:
-      - regional1
-      - regional2
+      - regional3
   helm-package:
     default: nginx-stable/nginx-ingress
 
