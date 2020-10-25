@@ -8,20 +8,20 @@ from cloudify.state import workflow_parameters as input
 #        instance.execute_operation('helm.install', kwargs={})
 
 def update_props(ni):
-	client=get_rest_client()
-	client_ni = client.node_instances.get(ni.id)
-	props = client_ni.runtime_properties
-	props['package_name'] = input['package_name']
-	client.node_instances.update(
-		client_ni.id,
-		version=client_ni.version,
-		runtime_properties=props
-	)
+    client=get_rest_client()
+    client_ni = client.node_instances.get(ni.id)
+    props = client_ni.runtime_properties
+    props['package_name'] = input['package_name']
+    client.node_instances.update(
+        client_ni.id,
+        version=client_ni.version,
+        runtime_properties=props
+    )
 
 for ni in ctx.node_instances:
-	if ni.node.type == 'kubernetes_helm_cluster':
-		update_props(ni)
-		ni.execute_operation('cloudify.interfaces.lifecycle.helm_create', kwargs={})
+    if ni.node.type == 'kubernetes_helm_cluster':
+        update_props(ni)
+        ni.execute_operation('cloudify.interfaces.lifecycle.helm_create', kwargs={})
         ni.execute_operation('cloudify.interfaces.lifecycle.helm_configure', kwargs={})
         ni.execute_operation('cloudify.interfaces.lifecycle.helm_install', kwargs={})
 
