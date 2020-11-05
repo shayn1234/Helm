@@ -25,10 +25,10 @@ node_templates:
         deployment:
           id: r31
           inputs: 
-            package_name: { get_attribute: [ SELF, package_name ] }
+            package_name: { get_attribute: [ kubernetes_helm_cluster_settings, package_name ] }
 
-
-
+  kubernetes_helm_cluster_settings:
+    type: cloudify.nodes.Root
 
 workflows:
   install_chart_on_clusters:

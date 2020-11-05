@@ -3,12 +3,13 @@ node_types:
     derived_from: cloudify.nodes.Component
     interfaces:
       cloudify.interfaces.lifecycle:
-        create:
+        create: {}
+        helm_create:
           implementation: cfy_extensions.cloudify_types.component.upload_blueprint
-        configure:
+        configure: {}
+        helm_configure:
           implementation: cfy_extensions.cloudify_types.component.create
-        start:
-          {}
+        start: {}
         helm_install:
           implementation: cfy_extensions.cloudify_types.component.execute_start
           inputs:
