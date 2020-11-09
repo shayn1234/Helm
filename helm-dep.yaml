@@ -65,7 +65,7 @@ node_templates:
           file_content: { get_secret: kube_config }
       resource_config:
         name: "myrelease"
-        chart: { get_input: package_name }
+        chart: { concat: [ { get_input: repo_name },'/', { get_input: chart_name } ]
     relationships:
       - target: helm_install
         type: cloudify.helm.relationships.run_on_host
