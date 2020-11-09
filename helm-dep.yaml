@@ -63,6 +63,8 @@ node_templates:
       client_config:
         configuration:
           file_content: { get_secret: kube_config }
+          api_options:
+            api_key: { get_secret: kube_token }
       resource_config:
         name: "myrelease"
         chart: { concat: [ { get_input: repo_name },'/', { get_input: chart_name } ] }
